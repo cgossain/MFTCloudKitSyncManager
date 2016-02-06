@@ -1,0 +1,29 @@
+{
+  "name": "GSSCloudKitSyncManager",
+  "version": "0.1.0",
+  "summary": "A short description of GSSCloudKitSyncManager.",
+  "description": "",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/GSSCloudKitSyncManager",
+  "license": "MIT",
+  "authors": {
+    "Christian Gossain": "Christian Gossain"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/GSSCloudKitSyncManager.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "GSSCloudKitSyncManager": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "frameworks": [
+    "Foundation",
+    "CoreData"
+  ]
+}

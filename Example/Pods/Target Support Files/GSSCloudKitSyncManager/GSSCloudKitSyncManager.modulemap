@@ -1,0 +1,6 @@
+framework module GSSCloudKitSyncManager {
+  umbrella header "GSSCloudKitSyncManager-umbrella.h"
+
+  export *
+  module * { export * }
+}
