@@ -58,6 +58,22 @@ public class GSSCloudKitSyncManager: NSObject {
     
     // MARK: - Methods (Public)
     
+    public func deleteRecordZone() {
+        let databaseSetupOperation =  GSSDatabaseSetupOperation()
+        databaseSetupOperation.wipeDatabase = true
+        
+        databaseSetupOperation.databaseSetupCompletionBlock = { operationError in
+            if let error = operationError {
+                NSLog("MODIFY ZONE ERROR: %@", error.description)
+            } else {
+                NSLog("ZONE DELETED!")
+                
+                GSSSyncOperation.clearServerChangeToken()
+            }
+        }
+        operationQueue.addOperation(databaseSetupOperation)
+    }
+    
     public func performSync() {
         let databaseSetupOperation =  GSSDatabaseSetupOperation()
         databaseSetupOperation.databaseSetupCompletionBlock = { operationError in
