@@ -85,6 +85,7 @@ class GSSSyncOperation: NSOperation {
         
         mainPrivateContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         mainPrivateContext.persistentStoreCoordinator = mainPSC
+        mainPrivateContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         changeTablePrivateContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         changeTablePrivateContext.persistentStoreCoordinator = changeTablePSC
