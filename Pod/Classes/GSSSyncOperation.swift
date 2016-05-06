@@ -553,16 +553,21 @@ class GSSSyncOperation: NSOperation {
         if let newToken = token {
             let data = NSKeyedArchiver.archivedDataWithRootObject(newToken)
             
-            NSUserDefaults.standardUserDefaults().setValue(data, forKey: kPreviousServerChangeTokenKey)
+            NSUserDefaults.standardUserDefaults().setObject(data, forKey: kPreviousServerChangeTokenKey)
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
     
     func previousServerChangeToken() -> CKServerChangeToken? {
-        if let data = NSUserDefaults.standardUserDefaults().valueForKey(kPreviousServerChangeTokenKey) as? NSData {
+        if let data = NSUserDefaults.standardUserDefaults().objectForKey(kPreviousServerChangeTokenKey) as? NSData {
             return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CKServerChangeToken
         }
         return nil
+    }
+    
+    static func clearServerChangeToken() {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kPreviousServerChangeTokenKey)
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
 
 }

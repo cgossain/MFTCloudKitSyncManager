@@ -20,9 +20,52 @@ struct GSSReference {
 
 extension NSManagedObject {
     
+//    public override class func initialize() {
+//        struct Static {
+//            static var token: dispatch_once_t = 0
+//        }
+//        
+//        // make sure this isn't a subclass
+//        if self !== NSManagedObject.self {
+//            return
+//        }
+//        
+//        dispatch_once(&Static.token) {
+//            let originalSelector = Selector("awakeFromInsert")
+//            let swizzledSelector = Selector("gss_awakeFromInsert")
+//            
+//            let originalMethod = class_getInstanceMethod(self, originalSelector)
+//            let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
+//            
+//            let didAddMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+//            
+//            if didAddMethod {
+//                class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))
+//            } else {
+//                method_exchangeImplementations(originalMethod, swizzledMethod)
+//            }
+//        }
+//    }
+    
     public func gss_modificationDate() -> NSDate {
         return self.valueForKeyPath(GSSLocalRecordModificationDateAttributeName) as! NSDate
     }
+    
+//    public func gss_awakeFromInsert() {
+//        self.gss_awakeFromInsert()
+//        
+//        // set the local record ID if one is not set
+//        if self.primitiveValueForKey(GSSLocalRecordIDAttributeName) == nil {
+//            self.setPrimitiveValue(NSUUID().UUIDString, forKey: GSSLocalRecordIDAttributeName)
+//        }
+//        
+//        // set the modification date if not present
+//        if self.primitiveValueForKey(GSSLocalRecordModificationDateAttributeName) == nil {
+//            self.setPrimitiveValue(NSDate(), forKey: GSSLocalRecordModificationDateAttributeName)
+//        }
+//    }
+    
+    // MARK: Methods (Public)
     
     /**
      Returns a CKRecord counterpart to this object by either creating a new one or if the managed object is already storing the encoded fields of a CKRecord, simply updates that record and returns it.
