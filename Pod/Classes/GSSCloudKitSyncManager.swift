@@ -214,4 +214,30 @@ extension NSManagedObjectContext {
         }
     }
     
+    public func saveManagedObjectContextHierarchy() throws {
+        var saveError: ErrorType?
+        var currentContext: NSManagedObjectContext? = self
+        
+        while let context = currentContext {
+            context.performBlockAndWait({
+                do {
+                    if context.hasChanges {
+                        try context.save()
+                    }
+                }
+                catch {
+                    saveError = error
+                }
+            })
+            
+            
+            if let error = saveError {
+                throw error
+            }
+            
+            // move to the parent context
+            currentContext = context.parentContext
+        }
+    }
+    
 }
