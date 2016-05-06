@@ -152,8 +152,8 @@ class GSSChangeTableManager: NSObject {
                 changeTableEntry?.setValue(obj.valueForKey(GSSLocalRecordIDAttributeName), forKey: GSSLocalRecordIDAttributeName)
                 
             case .DeleteEntry:
-                self.changeTableContext.deleteObject(changeTableEntry!)
-                
+                guard let entry = changeTableEntry else { return }
+                changeTableContext.deleteObject(entry)
             }
         }
     }
