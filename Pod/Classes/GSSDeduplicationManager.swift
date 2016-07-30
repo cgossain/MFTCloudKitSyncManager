@@ -11,12 +11,10 @@ import CoreData
 
 public protocol GSSContextDeduplicating {
     /**
-     Asks the deduplicator for an array of unique attributes for the specified entity name.
-     
-     The first attribute name in the array specifies the primary key to be used for determining uniqueness. Any subsequent objects are used to further refine the determination of uniqueness for NSManagedObjects with duplicate values.
+     Returns an array of unique attribute names for the specified entity name. The deduplicator uses this information to find duplicates within the database. At least 1 valid attribute name must be provided for the specified entity for deduplication to occur (i.e. if an attribute name does not exist on the specified entity, the attribute is ignored).
      
      - parameter entityName: The name of the entity for which unique attributes are being requested.
-     - returns: An array of strings representing the attributes to use to identify duplicate objects. Return nil to prevent any deduplication of the specified entity.
+     - returns: An array of strings representing the attributes to use to identify duplicate objects. At least 1 unique attribute must be provided for deduplication to occur.
      */
     func uniqueAttributeNamesForEntityName(entityName: String) -> [String]
     
@@ -133,37 +131,40 @@ public class GSSDeduplicationManager: NSObject {
             }
         }
         
-        var propertiesToFetch = [NSPropertyDescription]()
-        var propertiesToGroupBy = [NSPropertyDescription]()
-        
-        for (idx, description) in uniqueAttributeDescriptions.enumerate() {
-            if idx == 0 {
-                let primaryAttributeCountExpression = NSExpressionDescription()
-                primaryAttributeCountExpression.name = "count"
-                primaryAttributeCountExpression.expression = NSExpression(format: "count:(%K)", description.name)
-                primaryAttributeCountExpression.expressionResultType = .Integer64AttributeType
+        // at least 1 unique attribute is needed for deduplication to occur
+        if uniqueAttributeDescriptions.count > 0 {
+            var propertiesToFetch = [NSPropertyDescription]()
+            var propertiesToGroupBy = [NSPropertyDescription]()
+            
+            for (idx, description) in uniqueAttributeDescriptions.enumerate() {
+                if idx == 0 {
+                    let primaryAttributeCountExpression = NSExpressionDescription()
+                    primaryAttributeCountExpression.name = "count"
+                    primaryAttributeCountExpression.expression = NSExpression(format: "count:(%K)", description.name)
+                    primaryAttributeCountExpression.expressionResultType = .Integer64AttributeType
+                    
+                    propertiesToFetch.append(primaryAttributeCountExpression)
+                }
                 
-                propertiesToFetch.append(primaryAttributeCountExpression)
+                propertiesToFetch.append(description)
+                propertiesToGroupBy.append(description)
             }
             
-            propertiesToFetch.append(description)
-            propertiesToGroupBy.append(description)
-        }
-        
-        let fetchRequest = NSFetchRequest(entityName: entityName)
-        fetchRequest.propertiesToFetch = propertiesToFetch
-        fetchRequest.propertiesToGroupBy = propertiesToGroupBy
-        fetchRequest.includesPendingChanges = false
-        fetchRequest.fetchBatchSize = 100
-        fetchRequest.resultType = .DictionaryResultType
-        
-        do {
-            let results = try context.executeFetchRequest(fetchRequest) as NSArray
-            if let duplicates = results.filteredArrayUsingPredicate(NSPredicate(format: "count > 1")) as? [[String : AnyObject]] {
-                return duplicates
+            let fetchRequest = NSFetchRequest(entityName: entityName)
+            fetchRequest.propertiesToFetch = propertiesToFetch
+            fetchRequest.propertiesToGroupBy = propertiesToGroupBy
+            fetchRequest.includesPendingChanges = false
+            fetchRequest.fetchBatchSize = 100
+            fetchRequest.resultType = .DictionaryResultType
+            
+            do {
+                let results = try context.executeFetchRequest(fetchRequest) as NSArray
+                if let duplicates = results.filteredArrayUsingPredicate(NSPredicate(format: "count > 1")) as? [[String : AnyObject]] {
+                    return duplicates
+                }
+            } catch {
+                NSLog("ERROR FETCHING DUPLICATES: \(error)")
             }
-        } catch {
-            NSLog("ERROR FETCHING DUPLICATES: \(error)")
         }
         return nil
     }
