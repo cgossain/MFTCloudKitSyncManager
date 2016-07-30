@@ -82,7 +82,7 @@ class GSSChangeTableManager: NSObject {
         /**
         Few thing to note here:
         
-        1. For objects being inserted, it can be assumed with a high degree of certainty that there is no corresponding entry in the change table representing the inserted objects.
+        1. For objects being inserted, we can be assume with a high degree of certainty that there are no corresponding entries in the change table representing the inserted objects.
         
         2. For objects being updated, this change could potentially be a new change, or could simply be an additional change.
             • If this is a new change, we can simply add the entry (i.e. the entry does not exist in the change table)
@@ -141,7 +141,6 @@ class GSSChangeTableManager: NSObject {
             
             // handle the policy
             switch policy {
-                
             case .UpdateIncludingChangeType:
                 changeTableEntry?.setValue(obj.entity.name, forKey: GSSLocalRecordEntityNameAttributeName)
                 changeTableEntry?.setValue(obj.valueForKey(GSSLocalRecordIDAttributeName), forKey: GSSLocalRecordIDAttributeName)

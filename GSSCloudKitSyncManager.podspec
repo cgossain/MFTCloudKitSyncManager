@@ -9,22 +9,15 @@
 Pod::Spec.new do |s|
   s.name             = "GSSCloudKitSyncManager"
   s.version          = "0.1.0"
-  s.summary          = "A short description of GSSCloudKitSyncManager."
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
+  s.summary          = "A simple to use core data manager with built in syncing to via CloudKit."
   s.description      = <<-DESC
+                       This project offers a simple interface to create your core data stack, with the optional ability to sync changes to a private zone in a users iCloud account, via CloudKit. The sync procedure implemented follows the proposed procedure decribed in the CloudKit sessions from WWDC 2015.
                        DESC
 
   s.homepage         = "https://github.com/<GITHUB_USERNAME>/GSSCloudKitSyncManager"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Christian Gossain" => "Christian Gossain" }
   s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/GSSCloudKitSyncManager.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '9.0'
   s.requires_arc = true
@@ -33,8 +26,5 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'GSSCloudKitSyncManager' => ['Pod/Assets/*.png']
   }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'Foundation', 'CoreData'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'Foundation', 'CoreData', 'CloudKit'
 end
