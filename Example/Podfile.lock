@@ -1,20 +1,16 @@
 PODS:
-  - GSSCloudKitSyncManager (0.1.0)
-  - Nimble (3.0.0)
-  - Quick (0.8.0)
+  - MFTCloudKitSyncManager (0.1.0)
 
 DEPENDENCIES:
-  - GSSCloudKitSyncManager (from `../`)
-  - Nimble (= 3.0.0)
-  - Quick (~> 0.8.0)
+  - MFTCloudKitSyncManager (from `../`)
 
 EXTERNAL SOURCES:
-  GSSCloudKitSyncManager:
+  MFTCloudKitSyncManager:
     :path: ../
 
 SPEC CHECKSUMS:
-  GSSCloudKitSyncManager: 00021f6a8577c949ac8e0861a32e583725f66f81
-  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
-  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
+  MFTCloudKitSyncManager: 81e32b1b644b37f18d64efb53abedf54077ee2b4
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 310dc704f7afb2c36db4760681a6c253155f6915
+
+COCOAPODS: 1.1.0.beta.1

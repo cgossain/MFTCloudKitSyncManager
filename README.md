@@ -1,11 +1,11 @@
-# GSSCloudKitSyncManager
+# MFTCloudKitSyncManager
 
-[![CI Status](http://img.shields.io/travis/Christian Gossain/GSSCloudKitSyncManager.svg?style=flat)](https://travis-ci.org/Christian Gossain/GSSCloudKitSyncManager)
-[![Version](https://img.shields.io/cocoapods/v/GSSCloudKitSyncManager.svg?style=flat)](http://cocoapods.org/pods/GSSCloudKitSyncManager)
-[![License](https://img.shields.io/cocoapods/l/GSSCloudKitSyncManager.svg?style=flat)](http://cocoapods.org/pods/GSSCloudKitSyncManager)
-[![Platform](https://img.shields.io/cocoapods/p/GSSCloudKitSyncManager.svg?style=flat)](http://cocoapods.org/pods/GSSCloudKitSyncManager)
+[![CI Status](http://img.shields.io/travis/Christian Gossain/MFTCloudKitSyncManager.svg?style=flat)](https://travis-ci.org/Christian Gossain/MFTCloudKitSyncManager)
+[![Version](https://img.shields.io/cocoapods/v/MFTCloudKitSyncManager.svg?style=flat)](http://cocoapods.org/pods/MFTCloudKitSyncManager)
+[![License](https://img.shields.io/cocoapods/l/MFTCloudKitSyncManager.svg?style=flat)](http://cocoapods.org/pods/MFTCloudKitSyncManager)
+[![Platform](https://img.shields.io/cocoapods/p/MFTCloudKitSyncManager.svg?style=flat)](http://cocoapods.org/pods/MFTCloudKitSyncManager)
 
-## Usage
+## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
@@ -13,11 +13,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-GSSCloudKitSyncManager is available through [CocoaPods](http://cocoapods.org). To install
+MFTCloudKitSyncManager is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "GSSCloudKitSyncManager"
+pod "MFTCloudKitSyncManager"
 ```
 
 ## Author
@@ -26,4 +26,4 @@ Christian Gossain, Christian Gossain
 
 ## License
 
-GSSCloudKitSyncManager is available under the MIT license. See the LICENSE file for more info.
+MFTCloudKitSyncManager is available under the MIT license. See the LICENSE file for more info.
