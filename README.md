@@ -15,6 +15,19 @@ Since we ended up not using this library, there are probably kinks that need to 
 
 I decided to Open-Source this project since I believe it offers a well implemented sync mechanism between CloudKit and CoreData, and hope that someone else will find it usefull is some way.
 
+## Features
+
+### Available
+
+* Quick and easy Core Data stack creation.
+* Option to sync to iCloud via CloudKit APIs.
+* Sync conflic handling using predefined policies or by providing a custom conflic handler.
+* Ability to define rules to deduplicate the local store (see MFTContextDeduplicating protocol) after each sync completes.
+
+### Missing
+
+* Syncing Many-to-Many relationship have not been tested.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
